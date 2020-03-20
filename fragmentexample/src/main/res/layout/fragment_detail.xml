@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DetailFragmen">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <EditText
+        android:id="@+id/ed_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Имя"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/ed_id"
+        android:layout_margin="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="2"
+        android:hint="ID"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="@+id/ed_name"
+        app:layout_constraintTop_toTopOf="@+id/guideline" />
+
+    <ToggleButton
+        android:id="@+id/tb_sex"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+
+        android:background="@android:color/transparent"
+        android:button="@drawable/gender_back"
+        android:checked="true"
+        android:textOff="Ж"
+        android:textOn="М"
+        app:layout_constraintDimensionRatio="h,1:1"
+        app:layout_constraintStart_toEndOf="@+id/ed_id"
+        app:layout_constraintTop_toTopOf="@+id/ed_id" />
+</androidx.constraintlayout.widget.ConstraintLayout>

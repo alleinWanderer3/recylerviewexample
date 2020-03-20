@@ -1,13 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
-        <compositeConfiguration>
-          <compositeBuild compositeDefinitionSource="SCRIPT" />
-        </compositeConfiguration>
+        <option name="delegatedBuild" value="false" />
+        <option name="testRunner" value="PLATFORM" />
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/all_app_example" />
+            <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/app_morelivedata" />
+            <option value="$PROJECT_DIR$/app_room" />
+            <option value="$PROJECT_DIR$/app_room_live_data" />
+            <option value="$PROJECT_DIR$/app_with_provider" />
+            <option value="$PROJECT_DIR$/dz1_work" />
+            <option value="$PROJECT_DIR$/fragmentexample" />
+            <option value="$PROJECT_DIR$/fragmentsinteractiondemo" />
+            <option value="$PROJECT_DIR$/mydraw" />
+            <option value="$PROJECT_DIR$/tictactoe" />
+            <option value="$PROJECT_DIR$/userforprovider" />
+            <option value="$PROJECT_DIR$/viewmodelexample" />
+          </set>
+        </option>
         <option name="resolveModulePerSourceSet" value="false" />
       </GradleProjectSettings>
     </option>

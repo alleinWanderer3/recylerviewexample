@@ -1,12 +1,9 @@
 package com.example.dz1_work.data;
 
 import android.app.Application;
-import android.graphics.Rect;
-
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-
 import java.util.List;
 
 public class AnimalViewModel extends AndroidViewModel {

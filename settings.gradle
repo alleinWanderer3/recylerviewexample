@@ -1,1 +1,3 @@
-include ':app', ':app_morelivedata', ':userforprovider', ':viewmodelexample', ':all_app_example', ':dz1_work', ':mydraw', 'app_room','app_room_live_data', 'app_with_provider'
+include ':app', ':app_morelivedata', ':userforprovider', ':viewmodelexample', ':all_app_example', ':dz1_work', ':mydraw', ':tictactoe', 'app_room','app_room_live_data', 'app_with_provider'
+include ':fragmentexample'
+include ':fragmentsinteractiondemo'

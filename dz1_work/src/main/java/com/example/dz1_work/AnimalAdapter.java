@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,6 +15,10 @@ import com.example.dz1_work.data.Animal;
 import java.util.List;
 
 public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.AnimalViewHolder> {
+    public List<Animal> getAnimals() {
+        return animals;
+    }
+
     List<Animal> animals;
     int rowIndex = -1;
 
@@ -32,7 +37,7 @@ public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.AnimalView
     @NonNull
     @Override
     public AnimalViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item,parent,false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item2,parent,false);
         return new AnimalViewHolder(v);
     }
 
@@ -66,11 +71,25 @@ public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.AnimalView
 
     public class AnimalViewHolder extends RecyclerView.ViewHolder{
         public TextView tv_name, tv_description;
+        public ImageButton ib_delete;
         public AnimalViewHolder(@NonNull View itemView) {
             super(itemView);
             tv_description = itemView.findViewById(R.id.tv_description);
             tv_name = itemView.findViewById(R.id.tv_name);
+            ib_delete = itemView.findViewById(R.id.ib_delete);
+            ib_delete.setVisibility(View.GONE);
 
+        }
+        public void showMenuBtns(boolean show){
+            if(show){
+                tv_description.setVisibility(View.GONE);
+                tv_name.setVisibility(View.GONE);
+                ib_delete.setVisibility(View.VISIBLE);
+            } else {
+                tv_description.setVisibility(View.VISIBLE);
+                tv_name.setVisibility(View.VISIBLE);
+                ib_delete.setVisibility(View.GONE);
+            }
         }
     }
     public interface OnItemClickListener{

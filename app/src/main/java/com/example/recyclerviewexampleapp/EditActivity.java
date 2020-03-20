@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -24,6 +25,7 @@ public class EditActivity extends AppCompatActivity {
         final EditText ed_name = findViewById(R.id.ed_name);
         final EditText ed_surname = findViewById(R.id.ed_surname);
         final Spinner spinner = findViewById(R.id.sp_types);
+
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item,getResources().getStringArray(R.array.types));
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -70,6 +72,7 @@ public class EditActivity extends AppCompatActivity {
             ed_name.setText(intent.getExtras().getString("name",""));
             ed_surname.setText(intent.getExtras().getString("surname",""));
             spinner.setSelection(intent.getExtras().getInt("type",3));
+
         }
     }
 

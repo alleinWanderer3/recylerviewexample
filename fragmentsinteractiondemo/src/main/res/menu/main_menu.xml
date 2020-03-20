@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/menu_item_show_list" android:icon="@android:drawable/ic_dialog_alert" android:title="show list" app:showAsAction="never"/>
+    <item android:id="@+id/menu_item_show_details" android:icon="@android:drawable/ic_dialog_alert" android:title="show detail" app:showAsAction="never"/>
+    <item android:id="@+id/menu_item_exit" android:icon="@android:drawable/ic_menu_close_clear_cancel" android:title="exit" app:showAsAction="never"/>
+</menu>

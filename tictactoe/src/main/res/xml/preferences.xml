@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="key_is_x_turn"
+        android:title="is x turn first"
+        android:summary="this is summary"/>
+    <ListPreference android:title="design"
+        android:key="list_pref"
+        android:dependency="key_is_x_turn"
+        android:summary="design summary %s"
+        android:entries="@array/pref_list_entry"
+        android:entryValues="@array/pref_list_value"/>
+
+
+</PreferenceScreen>
