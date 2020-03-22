@@ -32,8 +32,9 @@ public class LoginFragment extends Fragment {
             throw  new RuntimeException("Host Acivity must implements loginFragmentListenr");
         }
     }
-
-
+    public void setListener(loginFragmentListener listener){
+        mListener = listener;
+    }
     public interface loginFragmentListener{
         void onUserLogin(String user);
         void onUserLoginDenied();
@@ -52,9 +53,9 @@ public class LoginFragment extends Fragment {
                 String login = ed_login.getText().toString();
                 String psw = ed_psw.getText().toString();
                 if(MainActivity.login1.equals(login)&& MainActivity.psw1.equals(psw)){
-                   mListener.onUserLogin(login);
+                    if(mListener!=null)  mListener.onUserLogin(login);
                 } else {
-                  mListener.onUserLoginDenied();
+                  if(mListener!=null)mListener.onUserLoginDenied();
                 }
             }
         });

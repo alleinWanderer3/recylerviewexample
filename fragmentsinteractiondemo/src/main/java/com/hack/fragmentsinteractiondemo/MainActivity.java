@@ -2,13 +2,16 @@ package com.hack.fragmentsinteractiondemo;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements LoginFragment.loginFragmentListener{
+import java.util.ArrayList;
+
+public class MainActivity extends AppCompatActivity implements LoginFragment.loginFragmentListener, RListFragment.ListItemClickListener {
     boolean isAuth = false;
 
     public final static String login1 = "user";
@@ -53,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.log
                 break;
             case R.id.menu_item_show_details:
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fl_container,DetailFragmen.newInstance("",""))
+                        .replace(R.id.fl_container,DetailFragmen.newInstance("",0,true))
                         .addToBackStack("list")
                         .commit();
                 break;
@@ -62,6 +65,9 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.log
                 break;
         }
         return true;
+    }
+    public void dos(){
+
     }
 
     @Override
@@ -78,5 +84,14 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.log
     public void onUserLoginDenied() {
         isAuth = false;
         Toast.makeText(this,"Wrond user data",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onListItemClicked(int position, User user) {
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fl_container,DetailFragmen.newInstance(user.name,user.id,user.isMale))
+                .addToBackStack("detail")
+                .commit();
     }
 }

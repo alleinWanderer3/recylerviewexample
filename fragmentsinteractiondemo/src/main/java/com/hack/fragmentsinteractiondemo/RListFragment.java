@@ -1,5 +1,6 @@
 package com.hack.fragmentsinteractiondemo;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -26,6 +27,20 @@ public class RListFragment extends Fragment {
     public RListFragment() {
         // Required empty public constructor
     }
+    public interface ListItemClickListener{
+        public void onListItemClicked(int position, User user);
+    }
+    private ListItemClickListener mListener;
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if(getActivity() instanceof LoginFragment.loginFragmentListener){
+            mListener = (ListItemClickListener) getActivity();
+        } else {
+            throw  new RuntimeException("Host Acivity must implements ListItemClickListener");
+        }
+    }
 
     ArrayList<User> getData(){
         String[] names = getContext().getResources().getStringArray(R.array.data);
@@ -43,17 +58,19 @@ public class RListFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_r_list, container, false);
         RecyclerView recyclerView = v.findViewById(R.id.rc_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
-        MyAdapter adapter = new MyAdapter(getData());
+        MyAdapter adapter = new MyAdapter(getData(),mListener);
         recyclerView.setAdapter(adapter);
+        
         return v;
     }
 
     class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
-
+        private ListItemClickListener mListener;
         ArrayList<User> mData;
 
-        public MyAdapter(ArrayList<User> data) {
+        public MyAdapter(ArrayList<User> data, ListItemClickListener listItemClickListener) {
             mData = data;
+            mListener = listItemClickListener;
         }
 
         @NonNull
@@ -84,6 +101,12 @@ public class RListFragment extends Fragment {
                     mData.get(position).selected = !mData.get(position).selected;
                 }
             });
+            holder.tv_name.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mListener.onListItemClicked(position, mData.get(position));
+                }
+            });
         }
 
         @Override
@@ -94,6 +117,7 @@ public class RListFragment extends Fragment {
         class MyViewHolder extends RecyclerView.ViewHolder {
             TextView tv_id, tv_name;
             ImageView imageView;
+
 
             public MyViewHolder(@NonNull View itemView) {
                 super(itemView);
