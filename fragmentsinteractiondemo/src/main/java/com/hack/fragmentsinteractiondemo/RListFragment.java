@@ -35,7 +35,7 @@ public class RListFragment extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        if(getActivity() instanceof LoginFragment.loginFragmentListener){
+        if(getActivity() instanceof ListItemClickListener){
             mListener = (ListItemClickListener) getActivity();
         } else {
             throw  new RuntimeException("Host Acivity must implements ListItemClickListener");
