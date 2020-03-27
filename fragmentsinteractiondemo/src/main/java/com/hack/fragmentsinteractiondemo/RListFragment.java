@@ -6,9 +6,11 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,11 +21,11 @@ import java.util.ArrayList;
 import java.util.Random;
 
 
-/**
+/**AsyncExample
  * A simple {@link Fragment} subclass.
  */
 public class RListFragment extends Fragment {
-
+    int selectedIndex = 0;
     public RListFragment() {
         // Required empty public constructor
     }
@@ -35,6 +37,7 @@ public class RListFragment extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
+        Log.d("list"," "+selectedIndex);
         if(getActivity() instanceof ListItemClickListener){
             mListener = (ListItemClickListener) getActivity();
         } else {
@@ -42,25 +45,18 @@ public class RListFragment extends Fragment {
         }
     }
 
-    ArrayList<User> getData(){
-        String[] names = getContext().getResources().getStringArray(R.array.data);
-        ArrayList<User> data = new ArrayList<>();
-        Random rnd = new Random();
-        for(int i=0;i<names.length;++i){
-            data.add(new User(names[i],i+1,rnd.nextBoolean()));
-        }
-        return data;
-    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_r_list, container, false);
         RecyclerView recyclerView = v.findViewById(R.id.rc_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
-        MyAdapter adapter = new MyAdapter(getData(),mListener);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.VERTICAL,false));
+        MyApp myApp = (MyApp) getContext().getApplicationContext();
+        MyAdapter adapter = new MyAdapter(myApp.getData(),mListener);
         recyclerView.setAdapter(adapter);
-        
+        ////
         return v;
     }
 
@@ -101,12 +97,20 @@ public class RListFragment extends Fragment {
                     mData.get(position).selected = !mData.get(position).selected;
                 }
             });
+
             holder.tv_name.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
+                public void onClick(View v) {//10
+
+                    notifyItemChanged(selectedIndex);//3
+                    selectedIndex = position;
                     mListener.onListItemClicked(position, mData.get(position));
+                    holder.tv_name.setBackgroundColor(Color.parseColor("#a1a1a1"));
                 }
             });
+            if(selectedIndex == position){
+                holder.tv_name.setBackgroundColor(Color.parseColor("#a1a1a1"));
+            } else  holder.tv_name.setBackgroundColor(Color.parseColor("#ffffff"));
         }
 
         @Override
