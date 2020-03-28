@@ -54,6 +54,7 @@ public class RListFragment extends Fragment {
         RecyclerView recyclerView = v.findViewById(R.id.rc_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.VERTICAL,false));
         MyApp myApp = (MyApp) getContext().getApplicationContext();
+        //
         MyAdapter adapter = new MyAdapter(myApp.getData(),mListener);
         recyclerView.setAdapter(adapter);
         ////
