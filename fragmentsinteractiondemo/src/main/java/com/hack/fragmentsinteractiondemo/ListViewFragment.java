@@ -47,7 +47,7 @@ public class ListViewFragment extends Fragment {
         // Inflate the layout for this fragment
         View v =  inflater.inflate(R.layout.fragment_todel, container, false);
         ListView listView = v.findViewById(R.id.listview);
-        String[] data = getContext().getResources().getStringArray(R.array.pairs_list);
+        String[] data = getContext().getResources().getStringArray(R.array.data);
        // ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,data);
         ArrayList<HashMap<String, String>> arrayList = new ArrayList<>();
         for(int i=0; i< data.length;++i){

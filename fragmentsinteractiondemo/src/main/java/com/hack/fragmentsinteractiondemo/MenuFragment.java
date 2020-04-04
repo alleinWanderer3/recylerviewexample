@@ -5,7 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.util.Pair;
+import android.os.ParcelUuid;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,11 +16,11 @@ import android.widget.TextView;
  * A simple {@link Fragment} subclass.
  */
 public class MenuFragment extends Fragment {
-    String mpair_crypto;
-    public static MenuFragment newInstance(Pair pair_crypto) {
+    String mUser;
+    public static MenuFragment newInstance(String user) {
 
         Bundle args = new Bundle();
-        args.putString("pair_crypto",pair_crypto);
+        args.putString("user",user);
         MenuFragment fragment = new MenuFragment();
         fragment.setArguments(args);
         return fragment;
@@ -31,11 +31,11 @@ public class MenuFragment extends Fragment {
         // Required empty public constructor
     }
 
-       @Override
+    @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if(getArguments()!=null){
-            mpair_crypto = getArguments().getString("user");
+            mUser = getArguments().getString("user");
         }
     }
 
@@ -45,7 +45,7 @@ public class MenuFragment extends Fragment {
         // Inflate the layout for this fragment
         View v =  inflater.inflate(R.layout.fragment_menu, container, false);
         TextView tv_user = v.findViewById(R.id.tv_user);
-        tv_user.setText(mpair_crypto);
+        tv_user.setText(mUser);
         return v;
     }
 }
