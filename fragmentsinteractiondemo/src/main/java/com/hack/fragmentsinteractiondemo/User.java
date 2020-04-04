@@ -1,14 +1,20 @@
 package com.hack.fragmentsinteractiondemo;
 
-public class User {
-    public String name;
-    public int id;
-    public boolean isMale;
-    public boolean selected = false;
+class Pair_crypto {
+    public String title;
+    public double price;
+    public double volume;
+    public String currency;
 
-    public User(String name, int id, boolean isMale) {
-        this.name = name;
-        this.id = id;
-        this.isMale = isMale;
+    public Pair_crypto(String title, double price, double volume) {
+        this.title = title;//currency
+        this.price = price;//cost
+        this.volume = volume;//vsego torguetsya - obem
     }
+
+    public Pair_crypto(String currency) {
+        this.title = currency;
+    }
+
+
 }

@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +31,7 @@ public class RListFragment extends Fragment {
         // Required empty public constructor
     }
     public interface ListItemClickListener{
-        public void onListItemClicked(int position, User user);
+        public void onListItemClicked(int position, Pair pair);
     }
     private ListItemClickListener mListener;
 
@@ -55,7 +56,7 @@ public class RListFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.VERTICAL,false));
         MyApp myApp = (MyApp) getContext().getApplicationContext();
         //
-        MyAdapter adapter = new MyAdapter(myApp.getData(),mListener);
+        MyAdapter adapter = new MyAdapter(myApp.getPair(),mListener);
         recyclerView.setAdapter(adapter);
         ////
         return v;
@@ -63,10 +64,9 @@ public class RListFragment extends Fragment {
 
     class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         private ListItemClickListener mListener;
-        ArrayList<User> mData;
+        ArrayList<Pair_crypto> mData;
 
-        public MyAdapter(ArrayList<User> data, ListItemClickListener listItemClickListener) {
-            mData = data;
+        public MyAdapter(ArrayList<Pair> pair, ListItemClickListener listItemClickListener) {
             mListener = listItemClickListener;
         }
 
@@ -79,36 +79,10 @@ public class RListFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
-            holder.tv_id.setText(""+mData.get(position).id);
-            holder.tv_name.setText(mData.get(position).name);
+            holder.tv_name.setText(""+mData.get(position).currency);
+            holder.tv_cost.setText((int) mData.get(position).cost);
+            holder.tv_volume.setText((int) mData.get(position).volume);
 
-            if (mData.get(position).isMale) {
-                holder.imageView.setImageResource(android.R.drawable.ic_lock_lock);
-            } else {
-                holder.imageView.setImageResource(android.R.drawable.ic_input_add);
-            }
-            holder.imageView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (mData.get(position).selected) {
-                        holder.tv_name.setBackgroundColor(Color.RED);
-                    } else {
-                        holder.tv_name.setBackgroundColor(Color.BLUE);
-                    }
-                    mData.get(position).selected = !mData.get(position).selected;
-                }
-            });
-
-            holder.tv_name.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {//10
-
-                    notifyItemChanged(selectedIndex);//3
-                    selectedIndex = position;
-                    mListener.onListItemClicked(position, mData.get(position));
-                    holder.tv_name.setBackgroundColor(Color.parseColor("#a1a1a1"));
-                }
-            });
             if(selectedIndex == position){
                 holder.tv_name.setBackgroundColor(Color.parseColor("#a1a1a1"));
             } else  holder.tv_name.setBackgroundColor(Color.parseColor("#ffffff"));
@@ -120,7 +94,7 @@ public class RListFragment extends Fragment {
         }
 
         class MyViewHolder extends RecyclerView.ViewHolder {
-            TextView tv_id, tv_name;
+            TextView tv_id, tv_name, tv_cost, tv_volume;
             ImageView imageView;
 
 
@@ -129,6 +103,8 @@ public class RListFragment extends Fragment {
                 tv_id = itemView.findViewById(R.id.tv_position);
                 tv_name = itemView.findViewById(R.id.tv_decription);
                 imageView = itemView.findViewById(R.id.iv_logo);
+                tv_cost = itemView.findViewById(R.id.tv_cost);
+                tv_volume= itemView.findViewById(R.id.tv_how_much);
             }
         }
     }

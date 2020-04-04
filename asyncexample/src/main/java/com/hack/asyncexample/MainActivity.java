@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
@@ -25,7 +27,10 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     public static final String MARKETS_URL = "https://api.bittrex.com/api/v1.1/public/getmarketsummaries";
     TextView tv_dataFromMarkets;
-    Handler handler = new Handler(){
+
+  
+
+    Handler handler = new Handler(Looper.getMainLooper()){
         @Override//метод, работающий в UI-потоке
         public void handleMessage(@NonNull Message msg) {
             super.handleMessage(msg);
@@ -42,16 +47,12 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         tv_dataFromMarkets = findViewById(R.id.tv_data);
         Handler handler2 = new Handler();
-        handler2.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(MainActivity.this,"отложенный запуск",Toast.LENGTH_SHORT).show();
-            }
-        },7000);
+        handler2.postDelayed(() -> Toast.makeText(MainActivity.this,"отложенный запуск",Toast.LENGTH_SHORT).show(),7000);
 
     }
 

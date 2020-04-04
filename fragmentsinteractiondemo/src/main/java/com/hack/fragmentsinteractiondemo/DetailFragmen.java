@@ -13,35 +13,35 @@ import androidx.fragment.app.Fragment;
 
 public class DetailFragmen extends Fragment {
 
-    private static final String ARG_NAME = "name";
-    private static final String ARG_ID = "id";
-    private static final String ARG_SEX = "sex";
+    private static final String ARG_CURRENCY = "currency";
+    private static final String ARG_COST = "cost";
+    private static final String ARG_VOLUME = "volume";
 
-    private String mName;
-    private int mId;
-    private boolean mIsMale;
+    private String mCurrency;
+    private double mCost;
+    private double mVolume;
 
     public DetailFragmen() {
         // Required empty public constructor
     }
 
-    public static DetailFragmen newInstance(String name, int id, boolean isMale) {
+    public static void newInstance(String mCurrency, double mCost, double mVolume){
         DetailFragmen fragment = new DetailFragmen();
         Bundle args = new Bundle();
-        args.putString(ARG_NAME, name);
-        args.putInt(ARG_ID, id);
-        args.putBoolean(ARG_SEX,isMale);
+        args.putString(ARG_CURRENCY, mCurrency);
+        args.putDouble(ARG_COST, mCost);
+        args.putDouble(ARG_VOLUME, mVolume);
         fragment.setArguments(args);
-        return fragment;
+
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mName = getArguments().getString(ARG_NAME);
-            mId = getArguments().getInt(ARG_ID);
-            mIsMale = getArguments().getBoolean(ARG_SEX);
+            mCurrency = getArguments().getString(ARG_CURRENCY);
+            mCost = getArguments().getDouble(ARG_COST);
+            mVolume = getArguments().getDouble(ARG_VOLUME);
         }
     }
 
@@ -50,12 +50,11 @@ public class DetailFragmen extends Fragment {
                              Bundle savedInstanceState) {
 
         View v =  inflater.inflate(R.layout.fragment_detail, container, false);
-        EditText ed_name = v.findViewById(R.id.ed_name);
-        EditText ed_id = v.findViewById(R.id.ed_id);
+        EditText ed_currency = v.findViewById(R.id.tv_decription);
+        EditText ed_cost = v.findViewById(R.id.tv_cost);
         ToggleButton tb_sex = v.findViewById(R.id.tb_sex);
-        ed_id.setText(""+mId);
-        ed_name.setText(mName);
-        tb_sex.setChecked(mIsMale);
+        ed_currency.setText(""+mCurrency);
+        ed_cost.setText((int) mCost);
         return v;
     }
 }
